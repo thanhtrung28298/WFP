@@ -96,13 +96,14 @@ func StartEngine() error {
 
 	condition[0].FieldKey = win.FWPM_CONDITION_IP_REMOTE_PORT
 	condition[0].MatchType = win.FWP_MATCH_EQUAL
-	//FWP_MATCH_EQUAL Kiểm tra giá trị có bằng với điều kiện không
 	condition[0].ConditionValue.Type = gowindows.FWP_UINT16
 	// Chặn kết nối ra tới cổng 80
 	condition[0].ConditionValue.SetUint16(80)
+	filter.Action.Type = win.FWP_ACTION_BLOCK // FWP_ACTION_PERMIT
 
 	condition[1].FieldKey = win.FWPM_CONDITION_MAC_LOCAL_ADDRESS
 	condition[1].MatchType = win.FWP_MATCH_EQUAL
+	//FWP_MATCH_EQUAL Kiểm tra giá trị có bằng với điều kiện không
 	condition[1].ConditionValue.Type = gowindows.FWP_BYTE_ARRAY6_TYPE
 	//Chặn theo MAC....
 	mac := "\x98\x54\x1B\x61\xB7\xCD"
