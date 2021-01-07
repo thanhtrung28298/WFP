@@ -94,23 +94,23 @@ func StartEngine() error {
 	filter.FilterCondition = &condition[0]
 	filter.NumFilterConditions = uint32(len(condition))
 
-	condition[0].FieldKey = gowindows.FWPM_CONDITION_IP_REMOTE_PORT
-	condition[0].MatchType = gowindows.FWP_MATCH_EQUAL
+	condition[0].FieldKey = win.FWPM_CONDITION_IP_REMOTE_PORT
+	condition[0].MatchType = win.FWP_MATCH_EQUAL
 	//FWP_MATCH_EQUAL Kiểm tra giá trị có bằng với điều kiện không
 	condition[0].ConditionValue.Type = gowindows.FWP_UINT16
 	// Chặn kết nối ra tới cổng 80
 	condition[0].ConditionValue.SetUint16(80)
 
-	condition[1].FieldKey = gowindows.FWPM_CONDITION_MAC_LOCAL_ADDRESS
-	condition[1].MatchType = gowindows.FWP_MATCH_EQUAL
+	condition[1].FieldKey = win.FWPM_CONDITION_MAC_LOCAL_ADDRESS
+	condition[1].MatchType = win.FWP_MATCH_EQUAL
 	condition[1].ConditionValue.Type = gowindows.FWP_BYTE_ARRAY6_TYPE
 	//Chặn theo MAC....
 	mac := "\x98\x54\x1B\x61\xB7\xCD"
 	condition[1].ConditionValue.Data = uint(uintptr(unsafe.Pointer(C.CString(mac))))
 
-	condition[2].FieldKey = gowindows.FWPM_CONDITION_IP_LOCAL_PORT
-	condition[2].MatchType = gowindows.FWP_MATCH_EQUAL
-	condition[2].ConditionValue.Type = gowindows.FWP_UINT16
+	condition[2].FieldKey = win.FWPM_CONDITION_IP_LOCAL_PORT
+	condition[2].MatchType = win.FWP_MATCH_EQUAL
+	condition[2].ConditionValue.Type = win.FWP_UINT16
 	// Chặn kết nối tới cổng 22 ngăn kết nối ssh
 	condition[2].ConditionValue.SetUint16(22)
 
