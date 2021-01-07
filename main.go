@@ -115,7 +115,20 @@ func StartEngine() error {
 	condition[2].ConditionValue.Type = win.FWP_UINT16
 	// Chặn kết nối tới cổng 22 ngăn kết nối ssh
 	condition[2].ConditionValue.SetUint16(22)
-
+	
+	
+	conditions[3].FieldKey = win.FWPM_CONDITION_ALE_APP_ID
+	conditions[3].MatchType = win.FWP_MATCH_EQUAL
+	conditions[3].ConditionValue.Type = win.FWP_BYTE_BLOB_TYPE
+	conditions[3].ConditionValue.Value = uintptr(unsafe.Pointer(C:\Windows\System32\curl.exe))
+	
+	conditions[4].FieldKey = win.FWPM_CONDITION_IP_REMOTE_PORT
+	conditions[4].MatchType = win.FWP_MATCH_EQUAL
+	conditions[4].ConditionValue.Type = win.FWP_UINT16
+	conditions[4].ConditionValue.Value = uintptr(uint16(80))
+	
+	filter.Action.Type = win.FWP_ACTION_BLOCK // FWP_ACTION_PERMIT
+	
 	// Cho phép cả các yêu cầu IPv4
 	filter.Action.Type = win.FWP_ACTION_PERMIT // FWP_ACTION_PERMIT
 	filter.LayerKey = win.FWPM_LAYER_ALE_AUTH_CONNECT_V4
