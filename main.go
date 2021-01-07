@@ -114,10 +114,10 @@ func StartEngine() error {
 	// Chặn kết nối tới cổng 22 ngăn kết nối ssh
 	condition[2].ConditionValue.SetUint16(22)
 
-	// Chặn tất cả các yêu cầu IPv4
-	filter.Action.Type = gowindows.FWP_ACTION_BLOCK // FWP_ACTION_PERMIT
-	filter.LayerKey = gowindows.FWPM_LAYER_ALE_AUTH_CONNECT_V4
-	filter.Weight.Type = gowindows.FWP_EMPTY
+	// Cho phép cả các yêu cầu IPv4
+	filter.Action.Type = win.FWP_ACTION_PERMIT // FWP_ACTION_PERMIT
+	filter.LayerKey = win.FWPM_LAYER_ALE_AUTH_CONNECT_V4
+	filter.Weight.Type = win.FWP_EMPTY
 	filter.NumFilterConditions = 1
 
 	var filterId gowindows.FilterId
