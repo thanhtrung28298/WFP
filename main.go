@@ -107,7 +107,8 @@ func StartEngine() error {
 	//Chặn theo MAC....
 	mac := "\x98\x54\x1B\x61\xB7\xCD"
 	condition[1].ConditionValue.Data = uint(uintptr(unsafe.Pointer(C.CString(mac))))
-
+	filter.Action.Type = win.FWP_ACTION_PERMIT // FWP_ACTION_BLOCK
+	
 	condition[2].FieldKey = win.FWPM_CONDITION_IP_LOCAL_PORT
 	condition[2].MatchType = win.FWP_MATCH_EQUAL
 	condition[2].ConditionValue.Type = win.FWP_UINT16
